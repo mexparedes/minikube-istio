@@ -1,0 +1,21 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: api-pruebas-virtual-service
+spec:
+  gateways:
+    - my-gateway
+  hosts:
+    - '*'
+  http:
+    - match:
+        - uri:
+            prefix: /controller
+      rewrite:
+        uri: /controller
+      route:
+        - destination:
+            host: >-
+              api-service
+            port:
+              number: 80
